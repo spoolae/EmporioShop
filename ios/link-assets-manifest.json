@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/SF-Pro-Rounded-Bold.ttf",
+      "sha1": "ff61a8eb119864c0800f424fa3223aa815426523"
+    },
+    {
+      "path": "assets/fonts/URWGeometricArabic-Bold.ttf",
+      "sha1": "b3ceaffc694b6ad39d0e897169eceaf936bee72d"
+    },
+    {
+      "path": "assets/fonts/URWGeometricArabic-Regular.ttf",
+      "sha1": "5c25b189027f7c675a44f5ea4b4b70d8d81bb969"
+    }
+  ]
+}

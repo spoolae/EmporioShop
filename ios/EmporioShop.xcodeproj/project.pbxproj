@@ -14,6 +14,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-EmporioShop-EmporioShopTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-EmporioShop-EmporioShopTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8ADB7E892D06473D831E3756 /* URWGeometricArabic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3F2A579DDC40AF8FF5A84B /* URWGeometricArabic-Bold.ttf */; };
+		2EC3AA65FF7B425B926C53B3 /* URWGeometricArabic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 895020C5E4864BF29074E612 /* URWGeometricArabic-Regular.ttf */; };
+		6FDB60784AA9491CA41BE262 /* SF-Pro-Rounded-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0918EE513F94B9DA6AF1585 /* SF-Pro-Rounded-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = EmporioShop/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-EmporioShop-EmporioShopTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmporioShop-EmporioShopTests.release.xcconfig"; path = "Target Support Files/Pods-EmporioShop-EmporioShopTests/Pods-EmporioShop-EmporioShopTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		2D3F2A579DDC40AF8FF5A84B /* URWGeometricArabic-Bold.ttf */ = {isa = PBXFileReference; name = "URWGeometricArabic-Bold.ttf"; path = "../assets/fonts/URWGeometricArabic-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		895020C5E4864BF29074E612 /* URWGeometricArabic-Regular.ttf */ = {isa = PBXFileReference; name = "URWGeometricArabic-Regular.ttf"; path = "../assets/fonts/URWGeometricArabic-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C0918EE513F94B9DA6AF1585 /* SF-Pro-Rounded-Bold.ttf */ = {isa = PBXFileReference; name = "SF-Pro-Rounded-Bold.ttf"; path = "../assets/fonts/SF-Pro-Rounded-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				11AE87A368504B06989BDE48 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +154,17 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		11AE87A368504B06989BDE48 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				2D3F2A579DDC40AF8FF5A84B /* URWGeometricArabic-Bold.ttf */,
+				895020C5E4864BF29074E612 /* URWGeometricArabic-Regular.ttf */,
+				C0918EE513F94B9DA6AF1585 /* SF-Pro-Rounded-Bold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -244,6 +262,9 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				8ADB7E892D06473D831E3756 /* URWGeometricArabic-Bold.ttf in Resources */,
+				2EC3AA65FF7B425B926C53B3 /* URWGeometricArabic-Regular.ttf in Resources */,
+				6FDB60784AA9491CA41BE262 /* SF-Pro-Rounded-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
