@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-magic-numbers */
 import React, {useRef, useState} from 'react';
 import {
@@ -17,10 +18,11 @@ import {sizes} from '../constants/sizes';
 interface TextInputProps extends NativeTextInputProps {
   placeholder: string;
   value?: string;
+  updatePasswordValue: (query: any) => void;
 }
 
 export const PasswordInput = ({style, ...props}: TextInputProps) => {
-  const [text, setText] = useState(props.value);
+  const [text, setText] = useState(props.value || '');
   const [textVisible, setTextVisible] = useState(false);
   const [borderColor, setBorderColor] = useState(colors.darkgrey);
   const transformOpacity = useRef(new Animated.Value(1)).current;
@@ -36,6 +38,7 @@ export const PasswordInput = ({style, ...props}: TextInputProps) => {
 
   const onBlur = () => {
     setBorderColor(colors.darkgrey);
+
     if (text === '' || text === undefined || text === null) {
       Animated.timing(transformOpacity, {
         toValue: 1,
@@ -51,6 +54,11 @@ export const PasswordInput = ({style, ...props}: TextInputProps) => {
     } else {
       setTextVisible(true);
     }
+  };
+
+  const handleOnChangeText = (query: any) => {
+    props.updatePasswordValue(query);
+    setText(query);
   };
 
   return (
@@ -69,15 +77,15 @@ export const PasswordInput = ({style, ...props}: TextInputProps) => {
           {...props}
           style={styles.input}
           value={text}
-          onChangeText={setText}
+          onChangeText={handleOnChangeText}
           placeholder={''}
           onFocus={() => onFocus()}
           onBlur={() => onBlur()}
-          secureTextEntry={textVisible}
+          secureTextEntry={!textVisible}
         />
         <TouchableOpacity onPress={handleClick}>
           <Icon
-            name="eye-outline"
+            name={textVisible ? 'eye-outline' : 'eye-off-outline'}
             size={sizes.inputIcon}
             color={colors.darkgrey}
           />

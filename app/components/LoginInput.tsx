@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-magic-numbers */
 import React, {useRef, useState} from 'react';
 import {
@@ -9,6 +10,7 @@ import {
   Animated,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import * as EmailValidator from 'email-validator';
 
 import {colors} from '../constants/colors';
 import {sizes} from '../constants/sizes';
@@ -16,11 +18,13 @@ import {sizes} from '../constants/sizes';
 interface TextInputProps extends NativeTextInputProps {
   placeholder: string;
   value?: string;
+  updateLoginValue: (query: any) => void;
 }
 
 export const LoginInput = ({style, ...props}: TextInputProps) => {
-  const [text, setText] = useState(props.value);
+  const [text, setText] = useState(props.value || '');
   const [borderColor, setBorderColor] = useState(colors.darkgrey);
+  const [isValid, setIsValid] = useState(false);
   const transformOpacity = useRef(new Animated.Value(1)).current;
 
   const onFocus = () => {
@@ -33,7 +37,18 @@ export const LoginInput = ({style, ...props}: TextInputProps) => {
   };
 
   const onBlur = () => {
-    setBorderColor(colors.darkgrey);
+    if (EmailValidator.validate(text)) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+
+    if (isValid) {
+      setBorderColor(colors.darkgrey);
+    } else {
+      setBorderColor(colors.error);
+    }
+
     if (text === '' || text === undefined || text === null) {
       Animated.timing(transformOpacity, {
         toValue: 1,
@@ -41,6 +56,11 @@ export const LoginInput = ({style, ...props}: TextInputProps) => {
         useNativeDriver: false,
       }).start();
     }
+  };
+
+  const handleOnChangeText = (query: any) => {
+    props.updateLoginValue(query);
+    setText(query);
   };
 
   return (
@@ -59,7 +79,7 @@ export const LoginInput = ({style, ...props}: TextInputProps) => {
           {...props}
           style={styles.input}
           value={text}
-          onChangeText={setText}
+          onChangeText={handleOnChangeText}
           placeholder={''}
           onFocus={() => onFocus()}
           onBlur={() => onBlur()}

@@ -6,5 +6,6 @@ export const colors = {
   lightgrey: '#f0f0f0',
   background: '#FFFFFF',
   active: '#101010',
-  transparent: 'rgba(0,0,0,0)'
+  transparent: 'rgba(0,0,0,0)',
+  error: '#ca3a3a'
 };

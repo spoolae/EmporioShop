@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {RootStackParamList} from '../../AppNavigator';
 import {BackHeader} from '../../components/BackHeader';
@@ -10,17 +11,42 @@ import {PasswordInput} from '../../components/PasswordInput';
 import {colors} from '../../constants/colors';
 
 export const RegisterScreen = () => {
+  const [loginValue, setLoginValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [repeatPasswordValue, setRepeatPasswordValue] = useState('');
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const updateLoginValue = (query: any) => {
+    setLoginValue(query);
+  };
+
+  const updatePasswordValue = (query: any) => {
+    setPasswordValue(query);
+  };
+
+  const updateRepeatPasswordValue = (query: any) => {
+    setRepeatPasswordValue(query);
+  };
+
   return (
     <SafeAreaView style={styles.background}>
       <BackHeader />
       <Text style={styles.label}>Register your account</Text>
-      <LoginInput placeholder={'Email'} style={{marginVertical: 15}} />
-      <PasswordInput placeholder={'Password'} style={{marginVertical: 15}} />
+      <LoginInput
+        placeholder={'Email'}
+        style={{marginVertical: 15}}
+        updateLoginValue={updateLoginValue}
+      />
+      <PasswordInput
+        placeholder={'Password'}
+        style={{marginVertical: 15}}
+        updatePasswordValue={updatePasswordValue}
+      />
       <PasswordInput
         placeholder={'Repeat password'}
         style={{marginVertical: 15}}
+        updatePasswordValue={updateRepeatPasswordValue}
       />
       <Button
         title="Sign up"
@@ -40,7 +66,7 @@ export const RegisterScreen = () => {
   );
 };
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   background: {
     height: '100%',
     backgroundColor: colors.background,
