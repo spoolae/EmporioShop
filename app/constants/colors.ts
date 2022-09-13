@@ -7,5 +7,6 @@ export const colors = {
   background: '#FFFFFF',
   active: '#101010',
   transparent: 'rgba(0,0,0,0)',
-  error: '#ca3a3a'
+  error: '#ca3a3a',
+  input: '#ededed'
 };

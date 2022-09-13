@@ -10,10 +10,13 @@ import {Button} from '../../components/Button';
 import {LoginInput} from '../../components/LoginInput';
 import {PasswordInput} from '../../components/PasswordInput';
 import {colors} from '../../constants/colors';
+import auth from '@react-native-firebase/auth';
 
 export const LoginScreen = () => {
   const [loginValue, setLoginValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [error, setError] = useState('');
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -23,6 +26,30 @@ export const LoginScreen = () => {
 
   const updatePasswordValue = (query: any) => {
     setPasswordValue(query);
+  };
+
+  const handleSignIn = () => {
+    if (loginValue && passwordValue) {
+      auth()
+        .signInWithEmailAndPassword(loginValue, passwordValue)
+        .then(() => {
+          console.log('User account created & signed in!');
+        })
+        .catch(error => {
+          if (error.code === 'auth/invalid-email') {
+            setError('That email address is invalid!');
+          }
+          if (error.code === 'auth/user-not-found') {
+            setError('That user is not found!');
+          }
+          if (error.code === 'auth/wrong-password') {
+            setError('The password is invalid!');
+          }
+          console.log(error);
+        });
+    } else {
+      setError('Empty email or password!');
+    }
   };
 
   return (
@@ -39,15 +66,12 @@ export const LoginScreen = () => {
         style={{marginVertical: 15}}
         updatePasswordValue={updatePasswordValue}
       />
+      <Text style={styles.error}>{error}</Text>
       <Button
         title="Sign in"
         containerStyle={styles.signInButton}
         style={{fontFamily: 'URWGeometricArabic-Regular', fontSize: 20}}
-      />
-      <Button
-        title="Forgot the password?"
-        variant="text"
-        style={{fontFamily: 'URWGeometricArabic-Regular', fontSize: 20}}
+        onPress={handleSignIn}
       />
       <View style={styles.signUp}>
         <Text style={styles.tip}>{"Don't have an account? "}</Text>
@@ -90,5 +114,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     position: 'absolute',
     bottom: 20,
+  },
+  error: {
+    fontSize: 20,
+    fontFamily: 'URWGeometricArabic-Regular',
   },
 });

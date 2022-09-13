@@ -24,7 +24,6 @@ interface TextInputProps extends NativeTextInputProps {
 export const LoginInput = ({style, ...props}: TextInputProps) => {
   const [text, setText] = useState(props.value || '');
   const [borderColor, setBorderColor] = useState(colors.darkgrey);
-  const [isValid, setIsValid] = useState(false);
   const transformOpacity = useRef(new Animated.Value(1)).current;
 
   const onFocus = () => {
@@ -37,18 +36,7 @@ export const LoginInput = ({style, ...props}: TextInputProps) => {
   };
 
   const onBlur = () => {
-    if (EmailValidator.validate(text)) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-
-    if (isValid) {
-      setBorderColor(colors.darkgrey);
-    } else {
-      setBorderColor(colors.error);
-    }
-
+    setBorderColor(colors.darkgrey);
     if (text === '' || text === undefined || text === null) {
       Animated.timing(transformOpacity, {
         toValue: 1,

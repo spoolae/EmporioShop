@@ -9,11 +9,13 @@ import {Button} from '../../components/Button';
 import {LoginInput} from '../../components/LoginInput';
 import {PasswordInput} from '../../components/PasswordInput';
 import {colors} from '../../constants/colors';
+import auth from '@react-native-firebase/auth';
 
 export const RegisterScreen = () => {
   const [loginValue, setLoginValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [repeatPasswordValue, setRepeatPasswordValue] = useState('');
+  const [error, setError] = useState('');
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -27,6 +29,34 @@ export const RegisterScreen = () => {
 
   const updateRepeatPasswordValue = (query: any) => {
     setRepeatPasswordValue(query);
+  };
+
+  const handleSignUp = () => {
+    if (loginValue && passwordValue && repeatPasswordValue) {
+      if (passwordValue === repeatPasswordValue) {
+        auth()
+          .createUserWithEmailAndPassword(loginValue, passwordValue)
+          .then(() => {
+            console.log('User account created & signed in!');
+          })
+          .catch(error => {
+            if (error.code === 'auth/invalid-email') {
+              setError('That email address is invalid!');
+            }
+            if (error.code === 'auth/user-not-found') {
+              setError('That user is not found!');
+            }
+            if (error.code === 'auth/email-already-in-use') {
+              console.log('That email address is already in use!');
+            }
+            console.log(error);
+          });
+      } else {
+        setError('Repeat password correctly!');
+      }
+    } else {
+      setError('Empty email or password!');
+    }
   };
 
   return (
@@ -48,10 +78,12 @@ export const RegisterScreen = () => {
         style={{marginVertical: 15}}
         updatePasswordValue={updateRepeatPasswordValue}
       />
+      <Text style={styles.error}>{error}</Text>
       <Button
         title="Sign up"
         containerStyle={styles.signInButton}
         style={{fontFamily: 'URWGeometricArabic-Regular', fontSize: 20}}
+        onPress={handleSignUp}
       />
       <View style={styles.signUp}>
         <Text style={styles.tip}>{'Already have an account? '}</Text>
@@ -94,5 +126,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     position: 'absolute',
     bottom: 20,
+  },
+  error: {
+    fontSize: 20,
+    fontFamily: 'URWGeometricArabic-Regular',
   },
 });
