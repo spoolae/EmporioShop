@@ -112,7 +112,7 @@ export const OnBoardingScreen = () => {
   );
 };
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   indicatorContainer: {
     width: '100%',
     alignItems: 'center',

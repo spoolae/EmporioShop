@@ -7,12 +7,14 @@ import {LoginScreen} from './screens/onboarding/LoginScreen';
 import {RegisterScreen} from './screens/onboarding/RegisterScreen';
 import {HomeScreen} from './screens/main/HomeScreen';
 import auth from '@react-native-firebase/auth';
-import {LoadingScreen} from './screens/onboarding/LoadingScreen';
+import {OffersScreen} from './screens/main/OffersScreen';
 
 export type RootStackParamList = {
   OnBoarding: undefined;
   Login: undefined;
   Register: undefined;
+  Home: undefined;
+  Offers: undefined;
 };
 
 const {Navigator, Screen} = createNativeStackNavigator();
@@ -34,15 +36,7 @@ export const AppNavigator = () => {
   }, []);
 
   if (initializing) {
-    return (
-      <NavigationContainer>
-        <Navigator
-          initialRouteName={'Loading'}
-          screenOptions={{headerShown: false}}>
-          <Screen name={'Loading'} component={LoadingScreen} />
-        </Navigator>
-      </NavigationContainer>
-    );
+    return null;
   }
 
   if (!user) {
@@ -63,6 +57,7 @@ export const AppNavigator = () => {
     <NavigationContainer>
       <Navigator initialRouteName={'Home'} screenOptions={{headerShown: false}}>
         <Screen name={'Home'} component={HomeScreen} />
+        <Screen name={'Offers'} component={OffersScreen} />
       </Navigator>
     </NavigationContainer>
   );
