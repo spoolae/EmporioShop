@@ -10,44 +10,6 @@ import {
 import {colors} from '../../constants/colors';
 import {CategoryProps} from './HomeScreen';
 
-// export interface CategoryProps {
-//   name: string;
-//   icon: string;
-// }
-
-// const categories = [
-//   {
-//     id: 1,
-//     name: 'Clothes',
-//     icon: 'https://cdn-icons-png.flaticon.com/128/717/717492.png',
-//   },
-//   {
-//     id: 2,
-//     name: 'Shoes',
-//     icon: 'https://cdn-icons-png.flaticon.com/128/8390/8390139.png',
-//   },
-//   {
-//     id: 3,
-//     name: 'Bags',
-//     icon: 'https://cdn-icons-png.flaticon.com/128/4999/4999938.png',
-//   },
-//   {
-//     id: 4,
-//     name: 'Accessories',
-//     icon: 'https://cdn-icons-png.flaticon.com/128/3247/3247925.png',
-//   },
-//   {
-//     id: 5,
-//     name: 'Jewellery',
-//     icon: 'https://cdn-icons-png.flaticon.com/128/636/636499.png',
-//   },
-//   {
-//     id: 6,
-//     name: 'Sale',
-//     icon: 'https://cdn-icons-png.flaticon.com/128/879/879859.png',
-//   },
-// ];
-
 interface ClothingCategoriesProps {
   categories: Array<CategoryProps>;
 }

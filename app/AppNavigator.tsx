@@ -5,10 +5,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {OnBoardingScreen} from './screens/onboarding/OnBoardingScreen';
 import {LoginScreen} from './screens/onboarding/LoginScreen';
 import {RegisterScreen} from './screens/onboarding/RegisterScreen';
-import {HomeScreen, StoreItemProps} from './screens/main/HomeScreen';
+import {
+  CategoryProps,
+  HomeScreen,
+  StoreItemProps,
+} from './screens/main/HomeScreen';
 import auth from '@react-native-firebase/auth';
 import {OffersScreen} from './screens/main/OffersScreen';
 import {OfferCardProps} from './components/OfferCard';
+import {MostPopularScreen} from './screens/main/MostPopularScreen';
 
 export type RootStackParamList = {
   OnBoarding: undefined;
@@ -16,6 +21,10 @@ export type RootStackParamList = {
   Register: undefined;
   Home: undefined;
   Offers: {offers: Array<StoreItemProps>};
+  MostPopular: {
+    mostPopular: Array<StoreItemProps>;
+    categories: Array<CategoryProps>;
+  };
 };
 
 const {Navigator, Screen} = createNativeStackNavigator<RootStackParamList>();
@@ -59,6 +68,7 @@ export const AppNavigator = () => {
       <Navigator initialRouteName={'Home'} screenOptions={{headerShown: false}}>
         <Screen name={'Home'} component={HomeScreen} />
         <Screen name={'Offers'} component={OffersScreen} />
+        <Screen name={'MostPopular'} component={MostPopularScreen} />
       </Navigator>
     </NavigationContainer>
   );

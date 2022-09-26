@@ -1,5 +1,15 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useEffect, useRef, useState} from 'react';
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+import {RootStackParamList} from '../../AppNavigator';
+import {BackHeader} from '../../components/BackHeader';
 import {
   MostPopularCard,
   MostPopularCardEmpty,
@@ -16,12 +26,10 @@ interface RenderItemProps {
   item: MostPopularCardProps;
 }
 
-interface MostPopularProps {
-  mostPopular: Array<StoreItemProps>;
-  categories: Array<CategoryProps>;
-}
+type RouteProps = NativeStackScreenProps<RootStackParamList, 'MostPopular'>;
 
-export const MostPopular = ({mostPopular, categories}: MostPopularProps) => {
+export const MostPopularScreen: React.FC<RouteProps> = ({route}) => {
+  const {mostPopular, categories} = route.params;
   const [active, setActive] = useState(0);
   const ctgsRef = useRef<FlatList>(null);
   const itmsRef = useRef<FlatList>(null);
@@ -60,9 +68,9 @@ export const MostPopular = ({mostPopular, categories}: MostPopularProps) => {
       return item.categoryId === active ? MostPopularCard(item) : null;
     }
   };
-
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.background}>
+      <BackHeader text={'Most Popular'} />
       <FlatList
         ref={ctgsRef}
         data={categories}
@@ -76,17 +84,20 @@ export const MostPopular = ({mostPopular, categories}: MostPopularProps) => {
         data={mostPopular}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
-        horizontal
         showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        contentContainerStyle={{paddingTop: 25, paddingBottom: 100}}
+        contentContainerStyle={{paddingBottom: 15}}
         ListEmptyComponent={() => <MostPopularCardEmpty />}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    height: '100%',
+    backgroundColor: colors.background,
+    paddingHorizontal: 20,
+  },
   container: {
     marginTop: 20,
   },

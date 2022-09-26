@@ -20,13 +20,18 @@ export const MostPopularCard = (item: MostPopularCardProps) => (
     <View
       style={{
         flexDirection: 'row',
-        width: width - 40,
+        width: width - 60,
+        backgroundColor: colors.semilightgrey,
+        borderRadius: 25,
+        marginHorizontal: 10,
+        padding: 10,
+        marginBottom: 25,
       }}>
       <Image
         source={{uri: item.image}}
         style={{
           height: width * 0.5 - 20,
-          width: width * 0.5 - 20,
+          width: width * 0.4,
           resizeMode: 'contain',
           borderRadius: 15,
         }}
@@ -35,28 +40,28 @@ export const MostPopularCard = (item: MostPopularCardProps) => (
         style={{
           flexDirection: 'column',
           justifyContent: 'space-between',
-          paddingLeft: 10,
+          marginHorizontal: 10,
+          width: width * 0.4 - 10,
         }}>
-        <Text
+        <View
           style={{
-            color: colors.active,
-            fontFamily: 'SF-Pro-Rounded-Bold',
-            fontSize: 24,
-            width: width * 0.5 - 20,
-            borderBottomColor: colors.lightgrey,
-            borderBottomWidth: 3,
+            backgroundColor: colors.background,
+            borderRadius: 15,
+            padding: 5,
           }}>
-          {item.name}
-        </Text>
-        <View>
+          <Text
+            style={{
+              color: colors.active,
+              fontFamily: 'SF-Pro-Rounded-Bold',
+              fontSize: 19,
+              textAlign: 'center',
+            }}>
+            {item.name}
+          </Text>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'center',
-              backgroundColor: colors.semilightgrey,
-              borderRadius: 20,
-              padding: 5,
-              width: 100,
             }}>
             <Icon name="star" size={20} color={colors.darkgrey} />
             <Text
@@ -69,17 +74,20 @@ export const MostPopularCard = (item: MostPopularCardProps) => (
               {item.rating}
             </Text>
           </View>
-          <Text
-            style={{
-              marginTop: 5,
-              color: colors.active,
-              fontFamily: 'SF-Pro-Rounded-Bold',
-              fontSize: 22,
-              width: width * 0.5 - 20,
-            }}>
-            {item.price}
-          </Text>
         </View>
+        <Text
+          style={{
+            marginTop: 5,
+            color: colors.active,
+            fontFamily: 'SF-Pro-Rounded-Bold',
+            fontSize: 22,
+            textAlign: 'center',
+            backgroundColor: colors.background,
+            borderRadius: 15,
+            padding: 5,
+          }}>
+          {item.price}
+        </Text>
       </View>
     </View>
   </TouchableOpacity>

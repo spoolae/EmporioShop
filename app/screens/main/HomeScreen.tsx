@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 import {RootStackParamList} from '../../AppNavigator';
+import {MostPopularCardEmpty} from '../../components/MostPopularCard';
 import {OfferCard} from '../../components/OfferCard';
 import {Searchbar} from '../../components/SearchBar';
 import {colors} from '../../constants/colors';
@@ -44,15 +45,20 @@ export const HomeScreen = () => {
   const [categories, setCategories] = useState<Array<CategoryProps>>([]);
   const [storeItems, setStoreItems] = useState<Array<StoreItemProps>>([]);
   const [offers, setOffers] = useState<Array<StoreItemProps>>([]);
+  const [mostPopular, setMostPopular] = useState<Array<StoreItemProps>>([]);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     getCategories();
     getStoreItems();
-    getOffers();
-    console.log(offers);
   }, []);
+
+  useEffect(() => {
+    getOffers();
+    getMostPopular();
+    console.log(offers);
+  }, [storeItems]);
 
   const getCategories = async () => {
     const categories: Array<CategoryProps> = [];
@@ -86,11 +92,18 @@ export const HomeScreen = () => {
     setStoreItems(storeItems);
   };
 
-  const getOffers = async () => {
-    const offers = await storeItems.filter(
+  const getOffers = () => {
+    const offers = storeItems.filter(
       ({isSpecial}: StoreItemProps) => isSpecial === true,
     );
     setOffers(offers);
+  };
+
+  const getMostPopular = () => {
+    const mostPoluar = storeItems.filter(
+      ({isPopular}: StoreItemProps) => isPopular === true,
+    );
+    setMostPopular(mostPoluar);
   };
 
   return (
@@ -117,11 +130,14 @@ export const HomeScreen = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <OfferCard
-        discount={offers[0].specialDiscount}
-        name={offers[0].specialName}
-        images={offers[0].gallery}
-      />
+      {offers.length > 0 ? (
+        <OfferCard
+          discount={offers[0].specialDiscount}
+          name={offers[0].specialName}
+          images={offers[0].gallery}
+        />
+      ) : null}
+
       <ScrollView
         style={{marginTop: 5}}
         showsVerticalScrollIndicator={false}
@@ -139,7 +155,13 @@ export const HomeScreen = () => {
               }}>
               Most Popular
             </Text>
-            <TouchableOpacity onPress={getCategories}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('MostPopular', {
+                  mostPopular: mostPopular,
+                  categories: categories,
+                })
+              }>
               <Text
                 style={{
                   fontFamily: 'URWGeometricArabic-Bold',
@@ -150,7 +172,7 @@ export const HomeScreen = () => {
               </Text>
             </TouchableOpacity>
           </View>
-          <MostPopular />
+          <MostPopular mostPopular={mostPopular} categories={categories} />
         </View>
       </ScrollView>
     </SafeAreaView>
