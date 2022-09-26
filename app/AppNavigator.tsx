@@ -5,19 +5,20 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {OnBoardingScreen} from './screens/onboarding/OnBoardingScreen';
 import {LoginScreen} from './screens/onboarding/LoginScreen';
 import {RegisterScreen} from './screens/onboarding/RegisterScreen';
-import {HomeScreen} from './screens/main/HomeScreen';
+import {HomeScreen, StoreItemProps} from './screens/main/HomeScreen';
 import auth from '@react-native-firebase/auth';
 import {OffersScreen} from './screens/main/OffersScreen';
+import {OfferCardProps} from './components/OfferCard';
 
 export type RootStackParamList = {
   OnBoarding: undefined;
   Login: undefined;
   Register: undefined;
   Home: undefined;
-  Offers: undefined;
+  Offers: {offers: Array<StoreItemProps>};
 };
 
-const {Navigator, Screen} = createNativeStackNavigator();
+const {Navigator, Screen} = createNativeStackNavigator<RootStackParamList>();
 
 export const AppNavigator = () => {
   const [initializing, setInitializing] = useState(true);

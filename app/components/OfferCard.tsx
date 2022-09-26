@@ -14,9 +14,9 @@ import {
 import {RootStackParamList} from '../AppNavigator';
 import {colors} from '../constants/colors';
 
-const {width, height} = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 
-interface OfferCardProps {
+export interface OfferCardProps {
   discount: string;
   name: string;
   images: Array<string>;
