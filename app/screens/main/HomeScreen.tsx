@@ -12,7 +12,6 @@ import {
   View,
 } from 'react-native';
 import {RootStackParamList} from '../../AppNavigator';
-import {MostPopularCardEmpty} from '../../components/MostPopularCard';
 import {OfferCard} from '../../components/OfferCard';
 import {Searchbar} from '../../components/SearchBar';
 import {colors} from '../../constants/colors';

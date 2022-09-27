@@ -1,28 +1,13 @@
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import {Dimensions, Image, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {RootStackParamList} from '../AppNavigator';
 import {colors} from '../constants/colors';
+import {StoreItemProps} from '../screens/main/HomeScreen';
 
 const {width} = Dimensions.get('screen');
 
-export interface MostPopularCardProps {
-  id: number;
-  categoryId: number;
-  name: string;
-  image: string;
-  rating: string;
-  price: string;
-  isSpecial: boolean;
-  specialPrice: string;
-}
-
-export const MostPopularCard = (item: MostPopularCardProps) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
+export const MostPopularCard = (item: StoreItemProps, navigation: any) => {
   const DefaultPrice = (
     <Text
       style={{
@@ -71,7 +56,10 @@ export const MostPopularCard = (item: MostPopularCardProps) => {
   );
 
   return (
-    <TouchableOpacity activeOpacity={0.6} key={item.id}>
+    <TouchableOpacity
+      activeOpacity={0.6}
+      key={item.id}
+      onPress={() => navigation.navigate('StoreItemDetails', {item: item})}>
       <View
         style={{
           flexDirection: 'row',

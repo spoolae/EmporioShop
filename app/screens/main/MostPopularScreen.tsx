@@ -3,7 +3,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,7 +12,6 @@ import {BackHeader} from '../../components/BackHeader';
 import {
   MostPopularCard,
   MostPopularCardEmpty,
-  MostPopularCardProps,
 } from '../../components/MostPopularCard';
 import {colors} from '../../constants/colors';
 import {CategoryProps, StoreItemProps} from './HomeScreen';
@@ -23,12 +21,15 @@ interface RenderCategoryProps {
 }
 
 interface RenderItemProps {
-  item: MostPopularCardProps;
+  item: StoreItemProps;
 }
 
 type RouteProps = NativeStackScreenProps<RootStackParamList, 'MostPopular'>;
 
-export const MostPopularScreen: React.FC<RouteProps> = ({route}) => {
+export const MostPopularScreen: React.FC<RouteProps> = ({
+  route,
+  navigation,
+}) => {
   const {mostPopular, categories} = route.params;
   const [active, setActive] = useState(0);
   const ctgsRef = useRef<FlatList>(null);
@@ -63,9 +64,11 @@ export const MostPopularScreen: React.FC<RouteProps> = ({route}) => {
 
   const renderItem = ({item}: RenderItemProps) => {
     if (active === 0) {
-      return MostPopularCard(item);
+      return MostPopularCard(item, navigation);
     } else {
-      return item.categoryId === active ? MostPopularCard(item) : null;
+      return item.categoryId === active
+        ? MostPopularCard(item, navigation)
+        : null;
     }
   };
   return (

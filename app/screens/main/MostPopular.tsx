@@ -1,9 +1,11 @@
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useEffect, useRef, useState} from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {RootStackParamList} from '../../AppNavigator';
 import {
   MostPopularCard,
   MostPopularCardEmpty,
-  MostPopularCardProps,
 } from '../../components/MostPopularCard';
 import {colors} from '../../constants/colors';
 import {CategoryProps, StoreItemProps} from './HomeScreen';
@@ -13,7 +15,7 @@ interface RenderCategoryProps {
 }
 
 interface RenderItemProps {
-  item: MostPopularCardProps;
+  item: StoreItemProps;
 }
 
 interface MostPopularProps {
@@ -25,6 +27,8 @@ export const MostPopular = ({mostPopular, categories}: MostPopularProps) => {
   const [active, setActive] = useState(0);
   const ctgsRef = useRef<FlatList>(null);
   const itmsRef = useRef<FlatList>(null);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     if (mostPopular.length > 0) {
@@ -55,11 +59,13 @@ export const MostPopular = ({mostPopular, categories}: MostPopularProps) => {
 
   const renderItem = ({item}: RenderItemProps) => {
     if (active === 0) {
-      return MostPopularCard(item);
+      return MostPopularCard(item, navigation);
     } else if (active === 6) {
-      return item.isSpecial ? MostPopularCard(item) : null;
+      return item.isSpecial ? MostPopularCard(item, navigation) : null;
     } else {
-      return item.categoryId === active ? MostPopularCard(item) : null;
+      return item.categoryId === active
+        ? MostPopularCard(item, navigation)
+        : null;
     }
   };
 
