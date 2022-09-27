@@ -1,3 +1,5 @@
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 import {
   Dimensions,
@@ -7,20 +9,36 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {RootStackParamList} from '../../AppNavigator';
 import {colors} from '../../constants/colors';
-import {CategoryProps} from './HomeScreen';
+import {CategoryProps, StoreItemProps} from './HomeScreen';
 
 interface ClothingCategoriesProps {
   categories: Array<CategoryProps>;
+  items: Array<StoreItemProps>;
 }
 
 const {width} = Dimensions.get('screen');
 
-export const ClothingCategories = ({categories}: ClothingCategoriesProps) => {
+export const ClothingCategories = ({
+  categories,
+  items,
+}: ClothingCategoriesProps) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const renderCategory = (category: CategoryProps) =>
     category.id > 0 ? (
       <View key={category.id}>
-        <TouchableOpacity style={styles.iconContainer}>
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() =>
+            navigation.navigate('Category', {
+              categoryId: category.id,
+              categoryName: category.name,
+              items: items,
+            })
+          }>
           <Image source={{uri: category.icon}} style={styles.icon} />
         </TouchableOpacity>
         <Text style={styles.name}>{category.name}</Text>
@@ -37,7 +55,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexWrap: 'wrap',
   },
-  categoryContainer: {},
   iconContainer: {
     width: width * 0.18,
     height: width * 0.18,

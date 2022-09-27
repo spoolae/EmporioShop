@@ -1,8 +1,10 @@
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 import {Dimensions, Image, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {RootStackParamList} from '../AppNavigator';
 import {colors} from '../constants/colors';
-import {sizes} from '../constants/sizes';
 
 const {width} = Dimensions.get('screen');
 
@@ -13,85 +15,127 @@ export interface MostPopularCardProps {
   image: string;
   rating: string;
   price: string;
+  isSpecial: boolean;
+  specialPrice: string;
 }
 
-export const MostPopularCard = (item: MostPopularCardProps) => (
-  <TouchableOpacity activeOpacity={0.6} key={item.id}>
+export const MostPopularCard = (item: MostPopularCardProps) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const DefaultPrice = (
+    <Text
+      style={{
+        marginTop: 5,
+        color: colors.active,
+        fontFamily: 'SF-Pro-Rounded-Bold',
+        fontSize: 22,
+        textAlign: 'center',
+        backgroundColor: colors.background,
+        borderRadius: 15,
+        padding: 5,
+      }}>
+      {item.price}
+    </Text>
+  );
+
+  const DiscountPrice = (
     <View
       style={{
-        flexDirection: 'row',
-        width: width - 60,
-        backgroundColor: colors.semilightgrey,
-        borderRadius: 25,
-        marginHorizontal: 10,
-        padding: 10,
-        marginBottom: 25,
+        marginTop: 5,
+        backgroundColor: colors.background,
+        borderRadius: 15,
       }}>
-      <Image
-        source={{uri: item.image}}
+      <Text
         style={{
-          height: width * 0.5 - 20,
-          width: width * 0.4,
-          resizeMode: 'contain',
-          borderRadius: 15,
-        }}
-      />
+          color: colors.active,
+          fontFamily: 'SF-Pro-Rounded-Bold',
+          fontSize: 20,
+          lineHeight: 38,
+          textAlign: 'center',
+        }}>
+        {item.price}
+      </Text>
+      <Text
+        style={{
+          color: colors.grey,
+          fontFamily: 'SF-Pro-Rounded-Bold',
+          fontSize: 16,
+          lineHeight: 20,
+          textAlign: 'center',
+          textDecorationLine: 'line-through',
+        }}>
+        {item.specialPrice}
+      </Text>
+    </View>
+  );
+
+  return (
+    <TouchableOpacity activeOpacity={0.6} key={item.id}>
       <View
         style={{
-          flexDirection: 'column',
-          justifyContent: 'space-between',
+          flexDirection: 'row',
+          width: width - 60,
+          backgroundColor: colors.semilightgrey,
+          borderRadius: 25,
           marginHorizontal: 10,
-          width: width * 0.4 - 10,
+          padding: 10,
+          marginBottom: 25,
         }}>
+        <Image
+          source={{uri: item.image}}
+          style={{
+            height: width * 0.5 - 20,
+            width: width * 0.4,
+            resizeMode: 'contain',
+            borderRadius: 15,
+          }}
+        />
         <View
           style={{
-            backgroundColor: colors.background,
-            borderRadius: 15,
-            padding: 5,
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            marginHorizontal: 10,
+            width: width * 0.4 - 10,
           }}>
-          <Text
-            style={{
-              color: colors.active,
-              fontFamily: 'SF-Pro-Rounded-Bold',
-              fontSize: 19,
-              textAlign: 'center',
-            }}>
-            {item.name}
-          </Text>
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
+              backgroundColor: colors.background,
+              borderRadius: 15,
+              padding: 5,
             }}>
-            <Icon name="star" size={20} color={colors.darkgrey} />
             <Text
               style={{
-                color: colors.darkgrey,
-                fontFamily: 'SF-Pro-Rounded-Regular',
-                fontSize: 18,
-                marginLeft: 10,
+                color: colors.active,
+                fontFamily: 'SF-Pro-Rounded-Bold',
+                fontSize: 19,
+                textAlign: 'center',
               }}>
-              {item.rating}
+              {item.name}
             </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}>
+              <Icon name="star" size={20} color={colors.darkgrey} />
+              <Text
+                style={{
+                  color: colors.darkgrey,
+                  fontFamily: 'SF-Pro-Rounded-Regular',
+                  fontSize: 18,
+                  marginLeft: 10,
+                }}>
+                {item.rating}
+              </Text>
+            </View>
           </View>
+          {item.isSpecial ? DiscountPrice : DefaultPrice}
         </View>
-        <Text
-          style={{
-            marginTop: 5,
-            color: colors.active,
-            fontFamily: 'SF-Pro-Rounded-Bold',
-            fontSize: 22,
-            textAlign: 'center',
-            backgroundColor: colors.background,
-            borderRadius: 15,
-            padding: 5,
-          }}>
-          {item.price}
-        </Text>
       </View>
-    </View>
-  </TouchableOpacity>
-);
+    </TouchableOpacity>
+  );
+};
 
 export const MostPopularCardEmpty = () => (
   <View

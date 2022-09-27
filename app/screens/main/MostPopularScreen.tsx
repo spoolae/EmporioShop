@@ -84,8 +84,9 @@ export const MostPopularScreen: React.FC<RouteProps> = ({route}) => {
         data={mostPopular}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{paddingBottom: 15}}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingTop: 10, paddingBottom: 15}}
+        style={{marginTop: 15}}
         ListEmptyComponent={() => <MostPopularCardEmpty />}
       />
     </SafeAreaView>

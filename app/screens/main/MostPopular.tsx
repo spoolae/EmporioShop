@@ -56,6 +56,8 @@ export const MostPopular = ({mostPopular, categories}: MostPopularProps) => {
   const renderItem = ({item}: RenderItemProps) => {
     if (active === 0) {
       return MostPopularCard(item);
+    } else if (active === 6) {
+      return item.isSpecial ? MostPopularCard(item) : null;
     } else {
       return item.categoryId === active ? MostPopularCard(item) : null;
     }

@@ -25,6 +25,7 @@ export interface StoreItemProps {
   isSpecial: boolean;
   specialDiscount: string;
   specialName: string;
+  specialPrice: string;
   isPopular: boolean;
   name: string;
   image: string;
@@ -143,7 +144,7 @@ export const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         stickyHeaderIndices={[1]}>
         <View style={{marginTop: 25}}>
-          <ClothingCategories categories={categories} />
+          <ClothingCategories categories={categories} items={storeItems} />
         </View>
         <View>
           <View style={styles.offers}>

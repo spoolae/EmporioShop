@@ -12,8 +12,9 @@ import {
 } from './screens/main/HomeScreen';
 import auth from '@react-native-firebase/auth';
 import {OffersScreen} from './screens/main/OffersScreen';
-import {OfferCardProps} from './components/OfferCard';
 import {MostPopularScreen} from './screens/main/MostPopularScreen';
+import {CategoryScreen} from './screens/main/CategoryScreen';
+import {StoreItemDetailsScreen} from './screens/main/StoreItemDetailsScreen';
 
 export type RootStackParamList = {
   OnBoarding: undefined;
@@ -24,6 +25,14 @@ export type RootStackParamList = {
   MostPopular: {
     mostPopular: Array<StoreItemProps>;
     categories: Array<CategoryProps>;
+  };
+  Category: {
+    items: Array<StoreItemProps>;
+    categoryId: number;
+    categoryName: string;
+  };
+  StoreItemDetails: {
+    item: StoreItemProps;
   };
 };
 
@@ -69,6 +78,8 @@ export const AppNavigator = () => {
         <Screen name={'Home'} component={HomeScreen} />
         <Screen name={'Offers'} component={OffersScreen} />
         <Screen name={'MostPopular'} component={MostPopularScreen} />
+        <Screen name={'Category'} component={CategoryScreen} />
+        <Screen name={'StoreItemDetails'} component={StoreItemDetailsScreen} />
       </Navigator>
     </NavigationContainer>
   );
