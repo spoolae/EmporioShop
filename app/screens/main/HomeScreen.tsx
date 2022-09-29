@@ -24,7 +24,7 @@ export interface StoreItemProps {
   isSpecial: boolean;
   specialDiscount: string;
   specialName: string;
-  specialPrice: string;
+  oldPrice: string;
   isPopular: boolean;
   name: string;
   image: string;
@@ -57,7 +57,6 @@ export const HomeScreen = () => {
   useEffect(() => {
     getOffers();
     getMostPopular();
-    console.log(offers);
   }, [storeItems]);
 
   const getCategories = async () => {

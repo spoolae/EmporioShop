@@ -10,7 +10,7 @@ import {StoreItemProps} from './HomeScreen';
 
 type RouteProps = NativeStackScreenProps<RootStackParamList, 'Category'>;
 
-export const CategoryScreen: React.FC<RouteProps> = ({route}) => {
+export const CategoryScreen: React.FC<RouteProps> = ({route, navigation}) => {
   const {items, categoryId, categoryName} = route.params;
 
   const getOffer = (offers: StoreItemProps) => (
@@ -25,9 +25,9 @@ export const CategoryScreen: React.FC<RouteProps> = ({route}) => {
 
   const getCategoryItem = (item: StoreItemProps) => {
     if (categoryId === 6 && item.isSpecial) {
-      return MostPopularCard(item);
+      return MostPopularCard(item, navigation);
     } else if (categoryId === item.categoryId) {
-      return MostPopularCard(item);
+      return MostPopularCard(item, navigation);
     }
   };
 

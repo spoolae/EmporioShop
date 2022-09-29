@@ -50,7 +50,7 @@ export const MostPopularCard = (item: StoreItemProps, navigation: any) => {
           textAlign: 'center',
           textDecorationLine: 'line-through',
         }}>
-        {item.specialPrice}
+        {item.oldPrice}
       </Text>
     </View>
   );
