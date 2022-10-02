@@ -13,16 +13,6 @@ type RouteProps = NativeStackScreenProps<RootStackParamList, 'Category'>;
 export const CategoryScreen: React.FC<RouteProps> = ({route, navigation}) => {
   const {items, categoryId, categoryName} = route.params;
 
-  const getOffer = (offers: StoreItemProps) => (
-    <View style={styles.offers} key={offers.id}>
-      <OfferCard
-        discount={offers.specialDiscount}
-        name={offers.specialName}
-        images={offers.gallery}
-      />
-    </View>
-  );
-
   const getCategoryItem = (item: StoreItemProps) => {
     if (categoryId === 6 && item.isSpecial) {
       return MostPopularCard(item, navigation);

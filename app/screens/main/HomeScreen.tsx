@@ -12,8 +12,8 @@ import {
   View,
 } from 'react-native';
 import {RootStackParamList} from '../../AppNavigator';
+import {HomeSearchbar} from '../../components/HomeSearchBar';
 import {OfferCard} from '../../components/OfferCard';
-import {Searchbar} from '../../components/SearchBar';
 import {colors} from '../../constants/colors';
 import {ClothingCategories} from './ClothingCategories';
 import {MostPopular} from './MostPopular';
@@ -107,7 +107,11 @@ export const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.background}>
-      <Searchbar placeholder="Search" />
+      <HomeSearchbar
+        placeholder="Search"
+        categories={categories}
+        items={storeItems}
+      />
       <View style={styles.offers}>
         <Text
           style={{

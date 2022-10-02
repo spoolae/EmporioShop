@@ -15,17 +15,17 @@ import {RootStackParamList} from '../AppNavigator';
 import {colors} from '../constants/colors';
 import {CategoryProps, StoreItemProps} from '../screens/main/HomeScreen';
 
-interface SearchbarProps extends ViewProps {
+interface HomeSearchbarProps extends ViewProps {
   placeholder: string;
   value?: string;
   categories: Array<CategoryProps>;
   items: Array<StoreItemProps>;
 }
 
-export const SearchBar = ({
+export const HomeSearchbar = ({
   style,
   ...props
-}: SearchbarProps & TextInputProps) => {
+}: HomeSearchbarProps & TextInputProps) => {
   const [text, setText] = useState(props.value);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();

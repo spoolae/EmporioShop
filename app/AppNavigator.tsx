@@ -15,6 +15,7 @@ import {OffersScreen} from './screens/main/OffersScreen';
 import {MostPopularScreen} from './screens/main/MostPopularScreen';
 import {CategoryScreen} from './screens/main/CategoryScreen';
 import {StoreItemDetailsScreen} from './screens/main/StoreItemDetailsScreen';
+import {SearchScreen} from './screens/main/SearchScreen';
 
 export type RootStackParamList = {
   OnBoarding: undefined;
@@ -34,6 +35,10 @@ export type RootStackParamList = {
   StoreItemDetails: {
     item: StoreItemProps;
   };
+  Search: {
+    items: Array<StoreItemProps>;
+    categories: Array<CategoryProps>;
+  };
 };
 
 const {Navigator, Screen} = createNativeStackNavigator<RootStackParamList>();
@@ -51,7 +56,7 @@ export const AppNavigator = () => {
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
+    return subscriber;
   }, []);
 
   if (initializing) {
@@ -80,6 +85,7 @@ export const AppNavigator = () => {
         <Screen name={'MostPopular'} component={MostPopularScreen} />
         <Screen name={'Category'} component={CategoryScreen} />
         <Screen name={'StoreItemDetails'} component={StoreItemDetailsScreen} />
+        <Screen name={'Search'} component={SearchScreen} />
       </Navigator>
     </NavigationContainer>
   );
