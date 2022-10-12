@@ -3,7 +3,7 @@ import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {RootStackParamList} from '../../AppNavigator';
 import {BackHeader} from '../../components/BackHeader';
-import {OfferCard, OfferCardProps} from '../../components/OfferCard';
+import {OfferCard} from '../../components/OfferCard';
 import {colors} from '../../constants/colors';
 import {StoreItemProps} from './HomeScreen';
 

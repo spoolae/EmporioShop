@@ -20,7 +20,7 @@ export const MostPopularCard = (item: StoreItemProps, navigation: any) => {
         borderRadius: 15,
         padding: 5,
       }}>
-      {item.price}
+      {item.price} PLN
     </Text>
   );
 
@@ -39,7 +39,7 @@ export const MostPopularCard = (item: StoreItemProps, navigation: any) => {
           lineHeight: 38,
           textAlign: 'center',
         }}>
-        {item.price}
+        {item.price} PLN
       </Text>
       <Text
         style={{
@@ -50,7 +50,7 @@ export const MostPopularCard = (item: StoreItemProps, navigation: any) => {
           textAlign: 'center',
           textDecorationLine: 'line-through',
         }}>
-        {item.oldPrice}
+        {item.oldPrice} PLN
       </Text>
     </View>
   );

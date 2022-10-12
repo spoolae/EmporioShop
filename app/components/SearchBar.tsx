@@ -20,6 +20,7 @@ interface SearchbarProps extends ViewProps {
   value?: string;
   categories: Array<CategoryProps>;
   items: Array<StoreItemProps>;
+  updateSearchQuery?: (query: string) => void;
 }
 
 export const SearchBar = ({
@@ -29,6 +30,12 @@ export const SearchBar = ({
   const [text, setText] = useState(props.value);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const clearSearchQuery = () => {
+    setText('');
+    return props.updateSearchQuery ? props.updateSearchQuery('') : null;
+  };
+
   return (
     <SafeAreaView>
       <View style={[styles.container, style]}>
@@ -37,7 +44,12 @@ export const SearchBar = ({
           {...props}
           style={styles.input}
           value={text}
-          onChangeText={setText}
+          onChangeText={text => {
+            setText(text);
+            return props.updateSearchQuery
+              ? props.updateSearchQuery(text)
+              : null;
+          }}
           placeholder={props.placeholder}
           onFocus={() =>
             navigation.navigate('Search', {
@@ -48,7 +60,7 @@ export const SearchBar = ({
         />
         <TouchableOpacity
           style={{position: 'absolute', right: 15}}
-          onPress={() => setText('')}>
+          onPress={clearSearchQuery}>
           <Icon name="close" size={20} color={colors.grey} />
         </TouchableOpacity>
       </View>

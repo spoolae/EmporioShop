@@ -24,14 +24,14 @@ export interface StoreItemProps {
   isSpecial: boolean;
   specialDiscount: string;
   specialName: string;
-  oldPrice: string;
+  oldPrice: number;
   isPopular: boolean;
   name: string;
   image: string;
   gallery: Array<string>;
   description: string;
   rating: string;
-  price: string;
+  price: number;
   sizes: Array<string>;
 }
 

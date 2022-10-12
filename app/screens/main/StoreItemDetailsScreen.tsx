@@ -48,9 +48,7 @@ export const StoreItemDetailsScreen: React.FC<RouteProps> = ({route}) => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useEffect(() => {
-    const price = parseInt(item.price, 10);
-    const currency = item.price.match(/[a-zA-Z]+/g);
-    setTotalPrice(price * quantity + ' ' + String(currency));
+    setTotalPrice(item.price * quantity);
   }, [quantity]);
 
   const renderImage = ({item}: RenderImageProps) => (
@@ -356,7 +354,7 @@ export const StoreItemDetailsScreen: React.FC<RouteProps> = ({route}) => {
                   fontFamily: 'SF-Pro-Rounded-Bold',
                   fontSize: 24,
                 }}>
-                {totalPrice}
+                {totalPrice} PLN
               </Text>
             </View>
             <View
