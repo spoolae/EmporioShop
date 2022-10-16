@@ -87,7 +87,7 @@ export const MostPopular = ({mostPopular, categories}: MostPopularProps) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         pagingEnabled
-        contentContainerStyle={{paddingTop: 25, paddingBottom: 100}}
+        contentContainerStyle={{paddingTop: 15, paddingBottom: 100}}
         ListEmptyComponent={() => <MostPopularCardEmpty />}
       />
     </View>

@@ -16,11 +16,14 @@ import {MostPopularScreen} from './screens/main/MostPopularScreen';
 import {CategoryScreen} from './screens/main/CategoryScreen';
 import {StoreItemDetailsScreen} from './screens/main/StoreItemDetailsScreen';
 import {SearchScreen} from './screens/main/SearchScreen';
+import {MainScreen} from './screens/main/MainScreen';
+import {CartScreen} from './screens/main/CartScreen';
 
 export type RootStackParamList = {
   OnBoarding: undefined;
   Login: undefined;
   Register: undefined;
+  Main: undefined;
   Home: undefined;
   Offers: {offers: Array<StoreItemProps>};
   MostPopular: {
@@ -39,6 +42,7 @@ export type RootStackParamList = {
     items: Array<StoreItemProps>;
     categories: Array<CategoryProps>;
   };
+  Cart: undefined;
 };
 
 const {Navigator, Screen} = createNativeStackNavigator<RootStackParamList>();
@@ -79,13 +83,15 @@ export const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-      <Navigator initialRouteName={'Home'} screenOptions={{headerShown: false}}>
+      <Navigator initialRouteName={'Main'} screenOptions={{headerShown: false}}>
+        <Screen name={'Main'} component={MainScreen} />
         <Screen name={'Home'} component={HomeScreen} />
         <Screen name={'Offers'} component={OffersScreen} />
         <Screen name={'MostPopular'} component={MostPopularScreen} />
         <Screen name={'Category'} component={CategoryScreen} />
         <Screen name={'StoreItemDetails'} component={StoreItemDetailsScreen} />
         <Screen name={'Search'} component={SearchScreen} />
+        <Screen name={'Cart'} component={CartScreen} />
       </Navigator>
     </NavigationContainer>
   );

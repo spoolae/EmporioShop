@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/prop-types */
 import {useNavigation} from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
+import {firebase} from '@react-native-firebase/auth';
 import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
@@ -38,6 +41,7 @@ const {width, height} = Dimensions.get('screen');
 
 export const StoreItemDetailsScreen: React.FC<RouteProps> = ({route}) => {
   const {item} = route.params;
+  const [user, setUser] = useState(firebase.auth().currentUser);
 
   const [currentSize, setCurrentSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -129,6 +133,23 @@ export const StoreItemDetailsScreen: React.FC<RouteProps> = ({route}) => {
       </TouchableOpacity>
     </View>
   );
+
+  const addToCart = async () => {
+    const docUID = Math.floor(
+      Math.random() * Math.floor(Math.random() * Date.now()),
+    ).toString();
+    await firestore()
+      .collection(user.uid)
+      .doc(docUID)
+      .set({
+        docUID: docUID,
+        itemId: item.id,
+        name: item.name,
+        image: item.image,
+        quantity: quantity,
+        price: item.price * quantity,
+      });
+  };
 
   return (
     <SafeAreaView style={{height: '100%', backgroundColor: colors.background}}>
@@ -357,31 +378,33 @@ export const StoreItemDetailsScreen: React.FC<RouteProps> = ({route}) => {
                 {totalPrice} PLN
               </Text>
             </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 15,
-                backgroundColor: colors.active,
-                paddingHorizontal: 15,
-                paddingVertical: 10,
-              }}>
-              <Icon
-                name="basket"
-                size={sizes.defaultIcon}
-                color={colors.background}
-              />
-              <Text
+            <TouchableOpacity activeOpacity={0.5} onPress={addToCart}>
+              <View
                 style={{
-                  color: colors.background,
-                  fontFamily: 'SF-Pro-Rounded-Regular',
-                  fontSize: 20,
-                  paddingLeft: 10,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 15,
+                  backgroundColor: colors.active,
+                  paddingHorizontal: 15,
+                  paddingVertical: 10,
                 }}>
-                Add to Cart
-              </Text>
-            </View>
+                <Icon
+                  name="basket"
+                  size={sizes.defaultIcon}
+                  color={colors.background}
+                />
+                <Text
+                  style={{
+                    color: colors.background,
+                    fontFamily: 'SF-Pro-Rounded-Regular',
+                    fontSize: 20,
+                    paddingLeft: 10,
+                  }}>
+                  Add to Cart
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

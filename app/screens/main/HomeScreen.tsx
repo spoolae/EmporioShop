@@ -133,13 +133,15 @@ export const HomeScreen = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      {offers.length > 0 ? (
-        <OfferCard
-          discount={offers[0].specialDiscount}
-          name={offers[0].specialName}
-          images={offers[0].gallery}
-        />
-      ) : null}
+      <View style={{marginTop: 5}}>
+        {offers.length > 0 ? (
+          <OfferCard
+            discount={offers[0].specialDiscount}
+            name={offers[0].specialName}
+            images={offers[0].gallery}
+          />
+        ) : null}
+      </View>
 
       <ScrollView
         style={{marginTop: 5}}

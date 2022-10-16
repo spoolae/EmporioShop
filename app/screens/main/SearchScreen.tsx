@@ -21,27 +21,9 @@ import {CategoryProps, StoreItemProps} from './HomeScreen';
 import BottomSheet from 'react-native-gesture-bottom-sheet';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import {Button} from '../../components/Button';
+import {sortBy} from '../../constants/sortBy';
 
 const {width} = Dimensions.get('screen');
-
-const sortBy = [
-  {
-    id: 0,
-    name: 'None',
-  },
-  {
-    id: 1,
-    name: 'Name',
-  },
-  {
-    id: 2,
-    name: 'Price to High',
-  },
-  {
-    id: 3,
-    name: 'Price to Low',
-  },
-];
 
 type RouteProps = NativeStackScreenProps<RootStackParamList, 'Search'>;
 
@@ -126,7 +108,6 @@ export const SearchScreen: React.FC<RouteProps> = ({route, navigation}) => {
 
   useEffect(() => {
     setSearchResCount(getSortedData.filter(Boolean).length);
-    console.log(items.sort((a, b) => a.price - b.price));
   }, [getSortedData]);
 
   const renderCategory = ({item}: RenderCategoryProps) => (
