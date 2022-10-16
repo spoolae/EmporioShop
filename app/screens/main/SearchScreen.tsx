@@ -177,7 +177,6 @@ export const SearchScreen: React.FC<RouteProps> = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={styles.background}>
-      {/* <Text>{activeCategory}</Text> */}
       {/* SearchBar */}
       <View
         style={{
