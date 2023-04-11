@@ -18,6 +18,7 @@ import {StoreItemDetailsScreen} from './screens/main/StoreItemDetailsScreen';
 import {SearchScreen} from './screens/main/SearchScreen';
 import {MainScreen} from './screens/main/MainScreen';
 import {CartScreen} from './screens/main/CartScreen';
+import ReduxTestScreen from './redux/ReduxTestScreen';
 
 export type RootStackParamList = {
   OnBoarding: undefined;
@@ -43,6 +44,7 @@ export type RootStackParamList = {
     categories: Array<CategoryProps>;
   };
   Cart: undefined;
+  ReduxTest: any;
 };
 
 const {Navigator, Screen} = createNativeStackNavigator<RootStackParamList>();
@@ -92,6 +94,7 @@ export const AppNavigator = () => {
         <Screen name={'StoreItemDetails'} component={StoreItemDetailsScreen} />
         <Screen name={'Search'} component={SearchScreen} />
         <Screen name={'Cart'} component={CartScreen} />
+        <Screen name={'ReduxTest'} component={ReduxTestScreen} />
       </Navigator>
     </NavigationContainer>
   );
