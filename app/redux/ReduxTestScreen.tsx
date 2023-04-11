@@ -6,8 +6,6 @@ import {Button} from '../components/Button';
 import {getCategoriesAction} from './categoriesSlice';
 
 const ReduxTestScreen = props => {
-  let a;
-
   const getCategories = () => {
     props.dispatch(getCategoriesAction());
   };
